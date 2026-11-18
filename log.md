@@ -93,3 +93,6 @@
 - Control: modular(mod 120) write alone → output stays at true magnitude (median |out−ab| = 2), exact-target 2.7%.
 - Caveat: finer classes average fewer problems (≥3 each) → class means more idiosyncratic.
 - Next: render pipeline (LaTeX via docker), then write paper. Open: upstream computation of residues (operand Fourier features) — maybe one experiment.
+
+### 2026-11-17 — Render pipeline
+- Built local docker image `mult-latex` (debian:12 + texlive) from `docker/Dockerfile.latex`; `./render.sh` compiles `paper/paper.tex` with latexmk and copies to `paper.pdf`. Skeleton renders.
