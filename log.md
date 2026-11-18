@@ -105,3 +105,7 @@
 - zero-shot "The product of a and b is": clean 99.0%; abl-mag 25.3%, abl-mod 54.3% (but wrong answers mostly far: 10% near) → dissociation signature weaker here; transplant 77.8%.
 - Conclusion: same neurons carry the answer across formats; error-type dissociation replicates in 3/4 formats.
 - Next: write paper (mechanism schematic figure + all sections), render.
+
+### 2026-11-17 — Exp 01b: 4-digit accuracy vs size (from `results/baseline.csv`)
+- 4-digit products: accuracy 90.4% (1000–1999), 81.5%, 71.4%, 64.4%, 59.6%, 55.4%, 55.4%, 49.7% (8000–8999); first-token accuracy ≈ full accuracy → errors are almost all in the leading-3-digit token. 3-digit products (a≥10): 99.2–100% in all bins.
+- Interpretation (for paper): the first token of a 4-digit product is ⌊ab/10⌋, whose residues are not simple functions of operand residues, so the residue comb can't sharpen it; selection falls back on the magnitude code whose absolute error grows with size (Exp 14B) → tens-digit (±10, ±20) errors that grow with product size.
