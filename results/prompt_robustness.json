@@ -1,0 +1,82 @@
+{
+ "default": {
+  "sample_top": [
+   "858",
+   "968",
+   "460",
+   "488"
+  ],
+  "clean_acc": 0.9975,
+  "ablate_magnitude": {
+   "acc": 0.745,
+   "wrong_within10": 0.0,
+   "wrong_units_ok": 0.5588235294117647
+  },
+  "ablate_modular": {
+   "acc": 0.7125,
+   "wrong_within10": 0.8434782608695652,
+   "wrong_units_ok": 0.017391304347826087
+  },
+  "transplant_both_equals_donor": 0.946969696969697
+ },
+ "times_symbol": {
+  "sample_top": [
+   "858",
+   "968",
+   "460",
+   "488"
+  ],
+  "clean_acc": 1.0,
+  "ablate_magnitude": {
+   "acc": 0.7,
+   "wrong_within10": 0.0,
+   "wrong_units_ok": 0.7083333333333334
+  },
+  "ablate_modular": {
+   "acc": 0.675,
+   "wrong_within10": 0.8538461538461538,
+   "wrong_units_ok": 0.03076923076923077
+  },
+  "transplant_both_equals_donor": 0.9370277078085643
+ },
+ "spaced": {
+  "sample_top": [
+   "858",
+   "968",
+   "460",
+   "488"
+  ],
+  "clean_acc": 0.9975,
+  "ablate_magnitude": {
+   "acc": 0.94,
+   "wrong_within10": 0.0,
+   "wrong_units_ok": 0.75
+  },
+  "ablate_modular": {
+   "acc": 0.8525,
+   "wrong_within10": 0.9152542372881356,
+   "wrong_units_ok": 0.01694915254237288
+  },
+  "transplant_both_equals_donor": 0.9275
+ },
+ "zero_shot_text": {
+  "sample_top": [
+   "858",
+   "968",
+   "460",
+   "488"
+  ],
+  "clean_acc": 0.99,
+  "ablate_magnitude": {
+   "acc": 0.2525,
+   "wrong_within10": 0.0,
+   "wrong_units_ok": 0.3076923076923077
+  },
+  "ablate_modular": {
+   "acc": 0.5425,
+   "wrong_within10": 0.09836065573770492,
+   "wrong_units_ok": 0.2786885245901639
+  },
+  "transplant_both_equals_donor": 0.7783375314861462
+ }
+}

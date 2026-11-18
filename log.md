@@ -96,3 +96,12 @@
 
 ### 2026-11-17 — Render pipeline
 - Built local docker image `mult-latex` (debian:12 + texlive) from `docker/Dockerfile.latex`; `./render.sh` compiles `paper/paper.tex` with latexmk and copies to `paper.pdf`. Skeleton renders.
+
+### 2026-11-17 — Exp 16: Prompt-format robustness (`scripts/16_prompt_robustness.py`, `results/prompt_robustness.json`)
+- Same neuron groups (found on default prompt), 400 problems per format. For formats whose next token is a bare `' '`, appended it and intervened at that position (first run mistakenly intervened one token early — logged and fixed).
+- default: clean 99.8%; abl-mag 74.5% (wrong within ±10: 0%), abl-mod 71.3% (wrong within ±10: 84%, units ok 1.7%); transplant-both→donor 94.7%.
+- `a×b=` (different shots): clean 100%; abl-mag 70.0% (0% near), abl-mod 67.5% (85% near, 3% units ok); transplant 93.7%.
+- `a * b =` spaced: clean 99.8%; abl-mag 94.0%, abl-mod 85.3% (92% near, 1.7% units ok); transplant 92.8%.
+- zero-shot "The product of a and b is": clean 99.0%; abl-mag 25.3%, abl-mod 54.3% (but wrong answers mostly far: 10% near) → dissociation signature weaker here; transplant 77.8%.
+- Conclusion: same neurons carry the answer across formats; error-type dissociation replicates in 3/4 formats.
+- Next: write paper (mechanism schematic figure + all sections), render.
