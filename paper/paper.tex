@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,booktabs,amsmath,amssymb,hyperref,xcolor,caption,subcaption}
+\hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
+\graphicspath{{../figures/}}
+
+\title{Magnitude and Modulus: How Llama-3.1-8B Multiplies}
+\author{Mechanistic interpretability study}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+%ABSTRACT%
+\end{abstract}
+
+\section{Introduction}
+%INTRO%
+
+\section{Setup}
+\label{sec:setup}
+\paragraph{Model and prompts.} We study the base model Llama-3.1-8B in bfloat16. Every prompt is a fixed four-shot prefix followed by the query,
+\begin{center}\texttt{3*4=12\textbackslash n15*6=90\textbackslash n21*13=273\textbackslash n8*7=56\textbackslash n$a$*$b$=}\end{center}
+and we read the greedy next-token prediction. The Llama-3 tokenizer encodes every integer from 0 to 999 as a single token, and longer integers in left-aligned chunks of three digits (\texttt{1081}$\to$\texttt{108},\texttt{1}). For our main dataset we therefore restrict to $a\in[10,99]$, $b\in[2,99]$ with $ab\le 999$. In this regime the query is exactly four tokens (\texttt{$a$}, \texttt{*}, \texttt{$b$}, \texttt{=}), and the model must emit the full product as \emph{one} token chosen from the 1000 number tokens. Throughout, ``the answer position'' means the final \texttt{=} token.
+
+\section{Behavior}
+\label{sec:behavior}
+%BEHAVIOR%
+
+\section{Where the computation happens}
+\label{sec:locate}
+%LOCATE%
+
+\section{What is represented}
+\label{sec:represent}
+%REPRESENT%
+
+\section{The neurons that write the answer}
+\label{sec:neurons}
+%NEURONS%
+
+\section{Causal interventions}
+\label{sec:interventions}
+%INTERVENTIONS%
+
+\section{Related work}
+%RELATED%
+
+\section{Limitations}
+%LIMITATIONS%
+
+\section{Conclusion}
+%CONCLUSION%
+
+\bibliographystyle{plain}
+\begin{thebibliography}{9}
+\bibitem{nikankin2024} Y.~Nikankin, A.~Reusch, A.~Mueller, Y.~Belinkov. Arithmetic without algorithms: Language models solve math with a bag of heuristics. \emph{arXiv:2410.21272}, 2024.
+\bibitem{kantamneni2025} S.~Kantamneni, M.~Tegmark. Language models use trigonometry to do addition. \emph{arXiv:2502.00873}, 2025.
+\bibitem{zhou2024} T.~Zhou, D.~Fu, V.~Sharan, R.~Jia. Pre-trained large language models use Fourier features to compute addition. \emph{NeurIPS}, 2024.
+\bibitem{stolfo2023} A.~Stolfo, Y.~Belinkov, M.~Sachan. A mechanistic interpretation of arithmetic reasoning in language models using causal mediation analysis. \emph{EMNLP}, 2023.
+\bibitem{meng2022} K.~Meng, D.~Bau, A.~Andonian, Y.~Belinkov. Locating and editing factual associations in GPT. \emph{NeurIPS}, 2022.
+\bibitem{nanda2023} N.~Nanda, L.~Chan, T.~Lieberum, J.~Smith, J.~Steinhardt. Progress measures for grokking via mechanistic interpretability. \emph{ICLR}, 2023.
+\bibitem{nostalgebraist2020} nostalgebraist. Interpreting GPT: the logit lens. \emph{LessWrong}, 2020.
+\bibitem{geva2022} M.~Geva, A.~Caciularu, K.~Wang, Y.~Goldberg. Transformer feed-forward layers build predictions by promoting concepts in the vocabulary space. \emph{EMNLP}, 2022.
+\end{thebibliography}
+\end{document}

@@ -35,3 +35,22 @@
 - Heads: **L15H14 (0.22)** and **L16H21 (0.20)** dominate; next best L15H15, L20H2 (0.04).
 - MLPs: no effect before L15; L15–L31 each recover 0.07–0.33 (peak L18 0.33, L31 0.26) → answer computation distributed over many late MLP layers.
 - Next: (a) attention patterns of L15H14/L16H21; (b) linear probes + logit lens at `=` by layer.
+
+### 2026-11-17 — Exp 04: Probes + logit lens at `=` (`scripts/04_probe.py` GPU cache, `scripts/04b_probe_fit.py` CPU fits)
+- Restructured: GPU script caches all 33 hidden states at `=` for all 2210 single-token problems; probes fit on CPU (PCA-256 + logistic/ridge).
+- Partial result (running): from L1 on, `=` linearly decodes operand units digits (1.0) and log(ab) (R²=1.0) — these are additive in (a,b), so trivially decodable from operand identity; NOT evidence of computation (and patching showed `=` isn't *used* before L15). Non-additive targets (product units ~0.55, product tens ≈ chance 0.08) are the informative ones. Full curves pending.
+- Mistake logged: `pkill -f 04_probe.py` killed my own shell; first probe version was too slow (sklearn while holding GPU).
+
+### 2026-11-17 — Exp 05: Mover heads (`scripts/05_head_attn.py`, `results/head_attn.json`)
+- L15H14 attends from `=` to **b** (0.96); L16H21 attends to **a** (0.95). L15H15 also → b (0.85). L20H2 diffuse.
+- Mean-ablating at `=` (n=300): none 99.7%, L15H14 99.0%, L16H21 97.0%, both 97.3%, two random heads 99.7%. → Movers identified but redundant; need larger ablation sets.
+
+### 2026-11-17 — Exp 06/07: Answer-writing neurons (`scripts/06_neurons.py`, `scripts/07_classify_neurons.py`)
+- DLA (direct logit attribution to the correct answer token, relative to mean over number tokens 0..999, final-norm linearized) for all MLP neurons L14–31 at `=`; top 60/layer cached (1080 neurons).
+- DLA grows with depth: L14–17 negligible; L18–31 large; biggest single neurons L30N13826 (0.27), L31N10258 (0.25), L29N1647 (0.20). Distributed: no neuron >0.3 logits.
+- Classified each neuron by output pattern over 0..999: smooth (low-freq, periods ≥100) = **magnitude**; else best modulus m (variance explained by n mod m) = **mod m**.
+- Top 200 neurons: magnitude 74 (ΣDLA 2.75), modular 72 (ΣDLA ≈2.3; m ∈ {10,100,2,5,3,8,7,11,6,20,...}), other 54 (1.7).
+- **Key finding — matched read/write:** modular neurons are activated by the *product's residue mod the same m* (R² 0.54) and not by magnitude (0.07); magnitude neurons are activated by log-magnitude (0.63) and not product residue (0.04).
+- Examples: L30N13826 mod3 (output R² 0.93, act by ab mod 3 0.66); L29N1647 mod8 (0.78 / 0.82); L26N8382 mod7; L26N10704 mod11; L29N11462 mod5; L28N2505 mod2; L31N10258 magnitude (smooth 0.97, act by mag 0.86).
+- Hypothesis: **the answer token is selected as the intersection of an approximate magnitude bump and residue constraints mod several small moduli** (residue-number-system–like code).
+- Next: (1) figure of example neurons; (2) group-level logit decomposition; (3) double-dissociation ablation; (4) residue/magnitude steering interventions.
