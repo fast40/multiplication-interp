@@ -64,3 +64,13 @@
 - Modular group: comb with spikes at multiples of 10, taller at ±20/±60/±100/±120 (common multiples of moduli), max at 0. Alone: top-1 67%, units digit 95%, but aliases one period away.
 - Sum: sharp peak at 0, **top-1 97%** from direct effects of 494 neurons only.
 - Supports "magnitude bump × residue comb" mechanism. Next: causal tests — mean-ablation double dissociation and activation transplant steering.
+
+### 2026-11-17 — Exp 10: Double dissociation + activation transplants (`scripts/10_ablate_transplant.py`, `results/ablate_transplant.json`, `results/ablate_transplant_outputs.npz`)
+- Groups from Exp 07 classification: magnitude 209 neurons, modular 285 (layers 14–31, at `=` only). Controls: size-matched random neurons from the same layers, excluding the top-DLA cache. All 2210 problems; prediction = argmax over number tokens 0..999.
+- **Mean-ablation:** magnitude → acc 71.8%, wrong answers within ±10 only 0.2%, yet 56% keep the right units digit. Modular → acc 73.0%, wrong answers within ±10 87%, but only 2.3% keep the right units digit. Random → 99.8% (= clean). **Clean double dissociation.**
+- **Transplant** (donor y: |py−px|≥100, different units digit): modular → units digit from donor 62% (random 0.1%), median distance to original product 4. Magnitude → median distance to donor product 17 (vs 300 to original), units digit from original 61%. **Both groups → output = donor answer 92.9%.**
+- Examples: 16×44=704 ← donor 312: modular→712, magnitude→304. 71×9=639 ← 36: modular→636, magnitude→39. 36×9=324 ← 128: magnitude→126 (≡0 mod 9 like 324).
+### 2026-11-17 — Exp 11: Residue transfer per modulus (`scripts/11_residue_transfer.py`, `results/residue_transfer.json`)
+- Among cases where donor and original differ mod m, fraction of outputs following donor/original residue after modular transplant: m=2 0.89/0.11, 4 0.69/0.15, 5 0.62/0.20, 8 0.41/0.17, 10 0.62/0.19, 3 0.46/0.29, 7 0.15/0.23, 9 0.15/0.21. Magnitude transplant reverses this (m=2 0.07/0.93, 10 0.05/0.61).
+- Honest caveat: moduli 2/4/5/8/10 (i.e. structure of the last digits) dominate; 3 is partial; 7/9/11 neurons exist but carry little causal weight at the group level.
+- Next: transplant/ablation figure; then the "upstream" question — how operand features become product residue/magnitude (operand embeddings Fourier structure? MLP L15–20 compute?).

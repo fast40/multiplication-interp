@@ -1,0 +1,98 @@
+{
+ "n_neurons": {
+  "magnitude": 209,
+  "modular": 285,
+  "random(mag-size)": 209,
+  "random(mod-size)": 285
+ },
+ "clean": {
+  "acc": 0.997737556561086,
+  "units_ok": 0.997737556561086,
+  "mod3_ok": 0.9981900452488688,
+  "within10": 1.0,
+  "med_abs_err": 0.0,
+  "units_ok_given_wrong": 0.0,
+  "within10_given_wrong": 1.0
+ },
+ "ablate_magnitude": {
+  "acc": 0.7180995475113122,
+  "units_ok": 0.8769230769230769,
+  "mod3_ok": 0.8981900452488688,
+  "within10": 0.718552036199095,
+  "med_abs_err": 0.0,
+  "units_ok_given_wrong": 0.5634028892455859,
+  "within10_given_wrong": 0.0016051364365971107
+ },
+ "ablate_modular": {
+  "acc": 0.7303167420814479,
+  "units_ok": 0.7366515837104073,
+  "mod3_ok": 0.8063348416289593,
+  "within10": 0.965158371040724,
+  "med_abs_err": 0.0,
+  "units_ok_given_wrong": 0.02348993288590604,
+  "within10_given_wrong": 0.8708053691275168
+ },
+ "ablate_random(mag-size)": {
+  "acc": 0.997737556561086,
+  "units_ok": 0.997737556561086,
+  "mod3_ok": 0.9981900452488688,
+  "within10": 1.0,
+  "med_abs_err": 0.0,
+  "units_ok_given_wrong": 0.0,
+  "within10_given_wrong": 1.0
+ },
+ "ablate_random(mod-size)": {
+  "acc": 0.997737556561086,
+  "units_ok": 0.997737556561086,
+  "mod3_ok": 0.9981900452488688,
+  "within10": 1.0,
+  "med_abs_err": 0.0,
+  "units_ok_given_wrong": 0.0,
+  "within10_given_wrong": 1.0
+ },
+ "transplant_modular": {
+  "units_from_donor": 0.6171945701357466,
+  "units_from_orig": 0.18868778280542986,
+  "equals_orig": 0.17647058823529413,
+  "equals_donor": 0.01583710407239819,
+  "med_dist_orig": 4.0,
+  "med_dist_donor": 330.0,
+  "hits_pred_orig_mag_donor_units": 0.27239819004524884,
+  "hits_pred_donor_mag_orig_units": 0.0
+ },
+ "transplant_magnitude": {
+  "units_from_donor": 0.052941176470588235,
+  "units_from_orig": 0.6144796380090498,
+  "equals_orig": 0.07873303167420814,
+  "equals_donor": 0.019909502262443438,
+  "med_dist_orig": 300.0,
+  "med_dist_donor": 17.0,
+  "hits_pred_orig_mag_donor_units": 0.0,
+  "hits_pred_donor_mag_orig_units": 0.10588235294117647
+ },
+ "transplant_random(mod-size)": {
+  "units_from_donor": 0.0009049773755656109,
+  "units_from_orig": 0.9972850678733032,
+  "equals_orig": 0.9972850678733032,
+  "equals_donor": 0.0,
+  "med_dist_orig": 0.0,
+  "med_dist_donor": 342.0,
+  "hits_pred_orig_mag_donor_units": 0.00045248868778280545,
+  "hits_pred_donor_mag_orig_units": 0.0
+ },
+ "transplant_random(mag-size)": {
+  "units_from_donor": 0.00045248868778280545,
+  "units_from_orig": 0.997737556561086,
+  "equals_orig": 0.997737556561086,
+  "equals_donor": 0.0,
+  "med_dist_orig": 0.0,
+  "med_dist_donor": 342.0,
+  "hits_pred_orig_mag_donor_units": 0.00045248868778280545,
+  "hits_pred_donor_mag_orig_units": 0.0
+ },
+ "transplant_both": {
+  "equals_donor": 0.9289592760180996,
+  "equals_orig": 0.0013574660633484162,
+  "med_dist_donor": 0.0
+ }
+}
