@@ -29,12 +29,12 @@ fig.tight_layout(); save(fig, "fig_neurons")
 R = json.load(open("results/ablate_transplant.json")); T = np.load("results/ablate_transplant_outputs.npz"); RT = json.load(open("results/residue_transfer.json"))
 Pt, Py = T["P"], T["P"][T["donor"]]
 fig, ax = plt.subplots(1, 3, figsize=(7.4, 2.7), gridspec_kw=dict(width_ratios=[1.1, 1.2, 1.0]))
-conds = [("clean", None), ("random", "ablate_random(mod-size)"), ("modular", "ablate_modular"), ("magnitude", "ablate_magnitude")]
+conds = [("clean", None), ("rand.", "ablate_random(mod-size)"), ("mod.", "ablate_modular"), ("mag.", "ablate_magnitude")]
 for i, (lab, k) in enumerate(conds):
     o = T[k] if k else T["transplant_random(mod-size)"] * 0 + Pt
     ok = (o == Pt).mean(); near = ((o != Pt) & (np.abs(o - Pt) <= 10)).mean(); far = ((np.abs(o - Pt) > 10)).mean()
     ax[0].bar(i, ok, color=C[0], width=0.65); ax[0].bar(i, near, bottom=ok, color=C[3], width=0.65); ax[0].bar(i, far, bottom=ok + near, color=C[7], width=0.65)
-ax[0].set_xticks(range(4), [c[0] for c in conds], fontsize=7, rotation=25); ax[0].set_ylabel("fraction of problems")
+ax[0].set_xticks(range(4), [c[0] for c in conds], fontsize=7.5); ax[0].set_ylabel("fraction of problems")
 ax[0].set_title("(a) mean-ablate group at '='")
 from matplotlib.patches import Patch
 ax[0].legend([Patch(color=C[0]), Patch(color=C[3]), Patch(color=C[7])], ["correct", "wrong, |err|≤10", "wrong, |err|>10"], loc="upper center", bbox_to_anchor=(0.5, -0.2), fontsize=7, ncol=1)

@@ -109,3 +109,12 @@
 ### 2026-11-17 — Exp 01b: 4-digit accuracy vs size (from `results/baseline.csv`)
 - 4-digit products: accuracy 90.4% (1000–1999), 81.5%, 71.4%, 64.4%, 59.6%, 55.4%, 55.4%, 49.7% (8000–8999); first-token accuracy ≈ full accuracy → errors are almost all in the leading-3-digit token. 3-digit products (a≥10): 99.2–100% in all bins.
 - Interpretation (for paper): the first token of a 4-digit product is ⌊ab/10⌋, whose residues are not simple functions of operand residues, so the residue comb can't sharpen it; selection falls back on the magnitude code whose absolute error grows with size (Exp 14B) → tens-digit (±10, ±20) errors that grow with product size.
+
+### 2026-11-17 — Paper written and rendered
+- `paper/paper.tex` → `paper.pdf` (11 pages) via `./render.sh`. Sections: abstract, intro, setup, behavior, localization, representation timing, neurons (two families, read/write match, bump+comb), causal interventions (double-dissociation ablation, transplants incl. per-modulus residue transfer, donor-free steering, precision prediction test, prompt robustness), discussion (explains 4-digit ±10/±20 failures), related work, limitations, conclusion.
+- 8 figures (schematic, behavior, patching, probes, neurons, group decomposition, interventions) + 2 tables; all numbers taken from results/ files logged above. Visually checked every page.
+- Corrections made while writing: table of transplant examples is 6 of 12 random printed examples (stated in caption); magnitude precision stated as 5–8% (from Exp 14B), not ±5%.
+
+## Status: COMPLETE
+The paper contains (1) a written and visual explanation of the mechanism (operand movers L15H14/L16H21 → magnitude "bump" + modular "comb" neuron families in L18–31), (2) controlled experiments (behavior grid, patching, probes, neuron selectivity), ablations (double dissociation vs random controls), and causal interventions that manipulate answers (transplants: 93% donor answer; donor-free steering of units digit, magnitude, and arbitrary targets with a confirmed precision prediction), and (3) a rendered LaTeX document `paper.pdf`.
+Open questions for future work: upstream computation of product residues from operand features; mechanism of the first token of 4-digit products; the ~100 failure band in magnitude transplants.
