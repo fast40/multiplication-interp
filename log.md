@@ -54,3 +54,13 @@
 - Examples: L30N13826 mod3 (output R² 0.93, act by ab mod 3 0.66); L29N1647 mod8 (0.78 / 0.82); L26N8382 mod7; L26N10704 mod11; L29N11462 mod5; L28N2505 mod2; L31N10258 magnitude (smooth 0.97, act by mag 0.86).
 - Hypothesis: **the answer token is selected as the intersection of an approximate magnitude bump and residue constraints mod several small moduli** (residue-number-system–like code).
 - Next: (1) figure of example neurons; (2) group-level logit decomposition; (3) double-dissociation ablation; (4) residue/magnitude steering interventions.
+
+### 2026-11-17 — Figures v1 (`scripts/style.py`, `scripts/08_figs_basic.py`)
+- fig_behavior (correctness map + 4-digit error histogram: spikes at ±10, ±20), fig_patching, fig_probes. Checked visually; fixed overlapping titles/colorbar.
+
+### 2026-11-17 — Exp 09: Group logit decomposition (`scripts/09_group_decomp.py`, `results/group_decomp.json`, `figures/fig_group_decomp`)
+- Summed centered direct contributions (act − mean act) × output pattern for all cached neurons by class: magnitude (n=209) vs modular (n=285), aligned on offset = candidate − ab.
+- Magnitude group: broad tent peaked at 0 (half-width ~60). Alone: top-1 15%, within ±10 79%, units digit 28%.
+- Modular group: comb with spikes at multiples of 10, taller at ±20/±60/±100/±120 (common multiples of moduli), max at 0. Alone: top-1 67%, units digit 95%, but aliases one period away.
+- Sum: sharp peak at 0, **top-1 97%** from direct effects of 494 neurons only.
+- Supports "magnitude bump × residue comb" mechanism. Next: causal tests — mean-ablation double dissociation and activation transplant steering.
