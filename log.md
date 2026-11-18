@@ -74,3 +74,12 @@
 - Among cases where donor and original differ mod m, fraction of outputs following donor/original residue after modular transplant: m=2 0.89/0.11, 4 0.69/0.15, 5 0.62/0.20, 8 0.41/0.17, 10 0.62/0.19, 3 0.46/0.29, 7 0.15/0.23, 9 0.15/0.21. Magnitude transplant reverses this (m=2 0.07/0.93, 10 0.05/0.61).
 - Honest caveat: moduli 2/4/5/8/10 (i.e. structure of the last digits) dominate; 3 is partial; 7/9/11 neurons exist but carry little causal weight at the group level.
 - Next: transplant/ablation figure; then the "upstream" question — how operand features become product residue/magnitude (operand embeddings Fourier structure? MLP L15–20 compute?).
+
+### 2026-11-17 — Figures v2 (`scripts/12_figs_mech.py`): fig_neurons (5 example neurons), fig_interventions (ablation stack, residue transfer, magnitude scatter).
+- Observation from fig_interventions(c): a band of magnitude-transplant outputs near ~100 when the donor product is ~900–1000 (failure mode; not yet explained).
+
+### 2026-11-17 — Exp 13: Divisibility detectors? (`scripts/13_divisibility.py`, `results/divisibility.json`)
+- Modular neurons with m<50 (n=153; m: 10×85, 5×22, 2×17, 20×14, 3,4,8×3, ...).
+- 30% are pure divisibility detectors (indicator [ab≡0 mod m] explains ≥80% of the residue-explained activation variance, same for output), but they carry 50% of these neurons' DLA. The rest (mostly mod 10) key on specific non-zero residues.
+- Read/write sign agreement 84%: the residue that drives the neuron is the residue whose logits it raises.
+- Next: donor-free steering using class-mean activations (residue d / magnitude T).
