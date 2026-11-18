@@ -38,7 +38,7 @@
 
 ### 2026-11-17 — Exp 04: Probes + logit lens at `=` (`scripts/04_probe.py` GPU cache, `scripts/04b_probe_fit.py` CPU fits)
 - Restructured: GPU script caches all 33 hidden states at `=` for all 2210 single-token problems; probes fit on CPU (PCA-256 + logistic/ridge).
-- Partial result (running): from L1 on, `=` linearly decodes operand units digits (1.0) and log(ab) (R²=1.0) — these are additive in (a,b), so trivially decodable from operand identity; NOT evidence of computation (and patching showed `=` isn't *used* before L15). Non-additive targets (product units ~0.55, product tens ≈ chance 0.08) are the informative ones. Full curves pending.
+- Partial result (running): from L1 on, `=` linearly decodes operand units digits (1.0) and log(ab) (R²=1.0) — these are additive in (a,b), so trivially decodable from operand identity; NOT evidence of computation (and patching showed `=` isn't *used* before L15). Non-additive targets are the informative ones. **Final curves:** product units digit flat ≈0.55 through L16, rises L17 (0.77) → L19 (0.93); hundreds digit L18–20 (0.73→0.97); **tens digit last**, L21–24 (0.25→0.91). Logit-lens top-1 over 0..999: 0.01 at L18, 0.16 L20, 0.40 L23, 0.83 L26, 0.96 L29, 1.0 L32. Order units→hundreds→tens matches the behavioral finding that the tens digit is the fragile part.
 - Mistake logged: `pkill -f 04_probe.py` killed my own shell; first probe version was too slow (sklearn while holding GPU).
 
 ### 2026-11-17 — Exp 05: Mover heads (`scripts/05_head_attn.py`, `results/head_attn.json`)
