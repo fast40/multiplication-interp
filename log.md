@@ -83,3 +83,13 @@
 - 30% are pure divisibility detectors (indicator [ab≡0 mod m] explains ≥80% of the residue-explained activation variance, same for output), but they carry 50% of these neurons' DLA. The rest (mostly mod 10) key on specific non-zero residues.
 - Read/write sign agreement 84%: the residue that drives the neuron is the residue whose logits it raises.
 - Next: donor-free steering using class-mean activations (residue d / magnitude T).
+
+### 2026-11-17 — Exp 14: Donor-free steering with class means (`scripts/groups.py`, `scripts/14_steer.py`, `results/steer.json`)
+- 300 random problems. (A) set modular neurons := mean activation over problems whose product ends in d (d ≠ true units digit): output units = d in 45–88% (per d; chance ~10%), output within ±10 of true ab 90–95%; exactly the nearest number ending in d 28–63%.
+- (B) set magnitude neurons := mean over problems with |ab−T|≤25, T=100..950: median |out−T| grows 8 → ~40 with T (≈constant relative precision, Weber-like); units digit kept 55–78%.
+- (C) write arbitrary t (modular mean for t%10 + magnitude mean for T=t): exact 11.7% (chance 0.1%), units 76%, median |err| 14 — misses are tens-digit errors, as predicted by a mod-10 comb + ±20 magnitude.
+### 2026-11-17 — Exp 15: Prediction test — finer residues → more exact writes (`scripts/15_write_precision.py`, `results/write_precision.json`)
+- Condition modular class mean on t mod m: exact write m=10 9.7%, m=20 17.0%, m=40 18.3%, **m=120 36.0%** (median |err| 16 → 12). Monotone, biggest jump when mod-3 info is added (120 = 8·3·5).
+- Control: modular(mod 120) write alone → output stays at true magnitude (median |out−ab| = 2), exact-target 2.7%.
+- Caveat: finer classes average fewer problems (≥3 each) → class means more idiosyncratic.
+- Next: render pipeline (LaTeX via docker), then write paper. Open: upstream computation of residues (operand Fourier features) — maybe one experiment.
